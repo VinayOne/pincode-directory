@@ -1,0 +1,14 @@
+@use '@angular/material' as mat;
+$primary: mat.define-palette(mat.$deep-purple-palette);
+
+
+header {
+    padding: 11px 7px;
+    height: 60px;
+    background-color: mat.get-color-from-palette($primary, A400);
+    color: #ffffff;
+}
+
+.mat-mdc-button:not(:disabled) {
+    color: #ffffff;
+}

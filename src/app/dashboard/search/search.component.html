@@ -1,0 +1,38 @@
+<mat-card>
+    <mat-card-header class="mb-3">
+      <mat-card-title>Find Indian Pin Codes</mat-card-title>
+    </mat-card-header>
+      <mat-card-content>
+          <div class="row">
+              <div class="col-6"></div>
+              <div class="col-6"></div>
+          </div>                        
+          <form [formGroup]="pincodeForm" (ngSubmit)="onSubmit()">
+              <div class="mb-3">                              
+                <mat-form-field appearance="outline" class="example-full-width">
+                  <mat-label>Select State</mat-label>
+                  <mat-select formControlName="stateName" (selectionChange)="onStateSelect()">
+                    <mat-option *ngFor="let state of states?.result" [value]="state">{{state}}</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+              <div class="mb-3">
+                  <mat-form-field appearance="outline">
+                      <mat-label>Select District</mat-label>
+                      <mat-select formControlName="districtName" (selectionChange)="onDistrictSelect()">
+                        <mat-option *ngFor="let district of districts?.result" [value]="district">{{district}}</mat-option>
+                      </mat-select>
+                  </mat-form-field>
+              </div>
+              <div class="mb-3">
+                  <mat-form-field appearance="outline">
+                      <mat-label>Select Post Office</mat-label>
+                      <mat-select formControlName="postOfficeName" (selectionChange)="onPostOfficeSelect()">
+                        <mat-option *ngFor="let po of postOffices?.result" [value]="po">{{po}}</mat-option>
+                      </mat-select>
+                  </mat-form-field>
+              </div>
+              <button type="submit" class="float-end" mat-raised-button color="primary" [disabled]="!pincodeForm.valid">GET PINCODE</button>
+            </form>
+      </mat-card-content>
+  </mat-card>
