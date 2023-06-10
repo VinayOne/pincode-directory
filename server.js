@@ -17,13 +17,13 @@ mongoose.connect(url, connectionParams)
     app.use(express.json());
     app.use(cors());
 
-		//app.use(express.static(path.join(__dirname, "dist", "millie-game-module")));
+		app.use(express.static(path.join(__dirname, "dist", "pincode-directory")));
 
 		app.use("/api", routes);
 
-		// app.get('*', (req, res) => {
-		//   res.sendFile(path.join(__dirname, "dist", "millie-game-module", "index.html"));
-		// });
+		app.get('*', (req, res) => {
+		  res.sendFile(path.join(__dirname, "dist", "pincode-directory", "index.html"));
+		});
 
 		const port = process.env.PORT || 3200;
 
