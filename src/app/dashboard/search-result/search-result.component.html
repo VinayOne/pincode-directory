@@ -3,14 +3,16 @@
         <div class="col-8">
             <div class="row">
                 <div class="col-12">
-                    <app-search></app-search>
+                    <app-search (callPinSearch)="ngOnInit()"></app-search>
                 </div>
             </div>
             <div class="row mt-1">
                 <div class="col-12">
-                    <mat-card>
+                    <mat-card *ngIf="pincodeDetails?.result.length > 0">
                         <mat-card-header class="mb-3">
-                            <mat-card-title>Indian Pin Codes</mat-card-title>
+                            <mat-card-title>
+                                Found {{pincodeDetails?.result.length || 0}} results for <span class="pin">{{pincode}}</span>
+                            </mat-card-title>
                         </mat-card-header>
                         <mat-card-content>
                             <div *ngFor="let pin of pincodeDetails?.result">
@@ -36,7 +38,7 @@
                                         State : {{pin.State}}
                                     </div>
                                 </div>
-                                <hr>
+                                <mat-divider class="mt-3 mb-3" *ngIf="pincodeDetails?.result.length > 1"></mat-divider>
                             </div>
                         </mat-card-content>
                     </mat-card>
@@ -44,31 +46,7 @@
             </div>
         </div>
         <div class="col-4">
-            <mat-card>
-                <mat-card-content>
-                    <cdk-accordion class="example-accordion">
-                        <cdk-accordion-item *ngFor="let item of items; let index = index;"
-                            #accordionItem="cdkAccordionItem" class="example-accordion-item" role="button" tabindex="0"
-                            [attr.id]="'accordion-header-' + index" [attr.aria-expanded]="accordionItem.expanded"
-                            [attr.aria-controls]="'accordion-body-' + index">
-                            <div class="example-accordion-item-header" (click)="accordionItem.toggle()">
-                                {{ item }}
-                                <span class="example-accordion-item-description">
-                                    Click to {{ accordionItem.expanded ? 'close' : 'open' }}
-                                </span>
-                            </div>
-                            <div class="example-accordion-item-body" role="region"
-                                [style.display]="accordionItem.expanded ? '' : 'none'"
-                                [attr.id]="'accordion-body-' + index"
-                                [attr.aria-labelledby]="'accordion-header-' + index">
-                                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Perferendis
-                                excepturi incidunt ipsum deleniti labore, tempore non nam doloribus blanditiis
-                                veritatis illo autem iure aliquid ullam rem tenetur deserunt velit culpa?
-                            </div>
-                        </cdk-accordion-item>
-                    </cdk-accordion>
-                </mat-card-content>
-            </mat-card>
+            <app-faq></app-faq>
         </div>
     </div>
 </div>

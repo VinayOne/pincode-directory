@@ -8,13 +8,15 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SharedModulesModule } from './modules/shared-modules/shared-modules.module';
 import { SearchResultComponent } from './dashboard/search-result/search-result.component';
 import { SearchComponent } from './dashboard/search/search.component';
+import { FaqComponent } from './dashboard/faq/faq.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     SearchResultComponent,
-    SearchComponent
+    SearchComponent,
+    FaqComponent
   ],
   imports: [
     BrowserModule,

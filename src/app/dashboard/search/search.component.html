@@ -1,38 +1,48 @@
 <mat-card>
-    <mat-card-header class="mb-3">
-      <mat-card-title>Find Indian Pin Codes</mat-card-title>
-    </mat-card-header>
-      <mat-card-content>
-          <div class="row">
-              <div class="col-6"></div>
-              <div class="col-6"></div>
-          </div>                        
-          <form [formGroup]="pincodeForm" (ngSubmit)="onSubmit()">
-              <div class="mb-3">                              
-                <mat-form-field appearance="outline" class="example-full-width">
-                  <mat-label>Select State</mat-label>
-                  <mat-select formControlName="stateName" (selectionChange)="onStateSelect()">
-                    <mat-option *ngFor="let state of states?.result" [value]="state">{{state}}</mat-option>
-                  </mat-select>
-                </mat-form-field>
-              </div>
-              <div class="mb-3">
-                  <mat-form-field appearance="outline">
-                      <mat-label>Select District</mat-label>
-                      <mat-select formControlName="districtName" (selectionChange)="onDistrictSelect()">
-                        <mat-option *ngFor="let district of districts?.result" [value]="district">{{district}}</mat-option>
-                      </mat-select>
-                  </mat-form-field>
-              </div>
-              <div class="mb-3">
-                  <mat-form-field appearance="outline">
-                      <mat-label>Select Post Office</mat-label>
-                      <mat-select formControlName="postOfficeName" (selectionChange)="onPostOfficeSelect()">
-                        <mat-option *ngFor="let po of postOffices?.result" [value]="po">{{po}}</mat-option>
-                      </mat-select>
-                  </mat-form-field>
-              </div>
-              <button type="submit" class="float-end" mat-raised-button color="primary" [disabled]="!pincodeForm.valid">GET PINCODE</button>
-            </form>
-      </mat-card-content>
-  </mat-card>
+  <mat-card-header class="mb-3">
+    <mat-card-title>Find Indian Pin Codes</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <form [formGroup]="pincodeForm">
+      <div class="row">
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 verticleDivider">
+          <p>Search Pincode By Location</p>
+          <div class="mb-3">
+            <mat-form-field appearance="outline" class="example-full-width">
+              <mat-label>Select State</mat-label>
+              <mat-select formControlName="stateName" (selectionChange)="onStateSelect()">
+                <mat-option *ngFor="let state of states?.result" [value]="state">{{state}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="mb-3">
+            <mat-form-field appearance="outline">
+              <mat-label>Select District</mat-label>
+              <mat-select formControlName="districtName" (selectionChange)="onDistrictSelect()">
+                <mat-option *ngFor="let district of districts?.result" [value]="district">{{district}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="mb-3">
+            <mat-form-field appearance="outline">
+              <mat-label>Select Post Office</mat-label>
+              <mat-select formControlName="postOfficeName" (selectionChange)="onPostOfficeSelect()">
+                <mat-option *ngFor="let po of postOffices?.result" [value]="po">{{po}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">          
+          <p>Search Location By Pincode</p>
+          <mat-form-field appearance="outline">
+            <mat-label>Enter Pincode</mat-label>
+            <input type="text" matInput placeholder="Enter Pincode" formControlName="pinCode" (keyup)="checkValidity()">
+          </mat-form-field>
+          <p>In today's fast-paced world, where communication and logistics play a vital role, having an efficient postal system is crucial. In India, one of the essential components of the postal system is the Pincode. Pincodes, also known as Postal Index Numbers, serve as unique identification numbers assigned to specific areas, helping streamline mail delivery and location identification.</p>
+        </div>
+      </div>
+      <button type="button" class="float-end" mat-raised-button color="primary" (click)="onSubmit()"
+        [disabled]="!enableSearchBtn">SEARCH</button>
+    </form>
+  </mat-card-content>
+</mat-card>

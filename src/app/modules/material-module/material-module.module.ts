@@ -8,6 +8,7 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {CdkAccordionModule} from '@angular/cdk/accordion';
 import {MatMenuModule} from '@angular/material/menu';
+import {MatDividerModule} from '@angular/material/divider';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import {MatMenuModule} from '@angular/material/menu';
     MatSelectModule,
     MatFormFieldModule,
     CdkAccordionModule,
-    MatMenuModule
+    MatMenuModule,
+    MatDividerModule
   ]
 })
 export class MaterialModuleModule { }

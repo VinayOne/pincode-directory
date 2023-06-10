@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { CommonServiceService } from 'src/app/services/common-service.service';
 import { Router } from '@angular/router'
@@ -9,6 +9,8 @@ import { Router } from '@angular/router'
   styleUrls: ['./search.component.scss']
 })
 export class SearchComponent {
+
+  @Output('callPinSearch') callPinSearch: EventEmitter<any> = new EventEmitter();
   
   states: any;
   districts: any;
@@ -17,13 +19,15 @@ export class SearchComponent {
 
   singlePincode: any;
   clearDistrictName = '';
+  clearPostOffice = '';
   
-  submitted = false;
+  enableSearchBtn = false;
 
   pincodeForm = new FormGroup({
     stateName: new FormControl('', Validators.required),
     districtName: new FormControl('', Validators.required),
-    postOfficeName: new FormControl('', Validators.required)
+    postOfficeName: new FormControl('', Validators.required),
+    pinCode: new FormControl('')
   });
 
   constructor(private commonService: CommonServiceService, private router: Router) {}
@@ -51,6 +55,7 @@ export class SearchComponent {
       next: response => {
         if(response) {
           this.districts = response;
+          this.pincodeForm.controls.pinCode.reset();
         }
       },
       error: err => {
@@ -65,7 +70,7 @@ export class SearchComponent {
       next: response => {
         if(response) {
           this.postOffices = response;
-          this.filterDistrictResult();
+          this.checkValidity();
         }
       },
       error: err => {
@@ -79,10 +84,12 @@ export class SearchComponent {
     this.commonService.getPincodeByPo(selectedPostOffice).subscribe({
       next: response => {
         if(response) {
-          console.log('pincode: ', response);
           this.pincodeResult = response;
           sessionStorage.setItem('pincodeData', JSON.stringify(this.pincodeResult));
           this.filterPincodeResult();
+          this.filterDistrictResult();
+          this.filterPostofficeName();
+          this.checkValidity();
         }
       },
       error: err => {
@@ -92,14 +99,13 @@ export class SearchComponent {
   }
 
   onSubmit(){
-    this.submitted = true;
     const pincodeData = {
-      selectedState: this.pincodeForm.value.stateName?.toLowerCase().split(' ').join('-'),
+      selectedState: this.pincodeResult.result[0].State.toLowerCase().split(' ').join('-'),
       selectedDistrict: this.clearDistrictName?.toLowerCase().split(' ').join('-'),
-      selectedPostOffice: this.pincodeForm.value.postOfficeName?.toLowerCase().split(' ').join('-'),
+      selectedPostOffice: this.clearPostOffice?.toLowerCase().split(' ').join('-'),
       pincode: this.singlePincode
     }
-
+    this.callPinSearch.emit();
     const url = `/pincode/${pincodeData.pincode}/${pincodeData.selectedState}/${pincodeData.selectedDistrict}/${pincodeData.selectedPostOffice}`;
     this.router.navigateByUrl(url);
   }
@@ -113,8 +119,45 @@ export class SearchComponent {
   }
 
   filterDistrictResult() {
-    const selectedDistrict = this.pincodeForm.value.districtName?.replace(/[^a-zA-Z0-9 ]/g, '') || '';
+    const selectedDistrict = this.pincodeResult.result[0].District?.replace(/[^a-zA-Z0-9 ]/g, '') || '';
     this.clearDistrictName = selectedDistrict;
+  }
+
+  filterPostofficeName() {
+    const selectedPostOffice = this.pincodeResult.result[0].PostOffice?.replace(/[^a-zA-Z0-9 ]/g, '') || '';
+    this.clearPostOffice = selectedPostOffice;
+  }
+
+  checkValidity() {
+    const searchPin = this.pincodeForm.value.pinCode || '';
+    if(searchPin.length === 6 || this.pincodeForm.valid) {
+      this.enableSearchBtn = true;
+      if(searchPin.length === 6) {
+        this.pincodeForm.controls.stateName.reset();
+        this.pincodeForm.controls.districtName.reset();
+        this.pincodeForm.controls.postOfficeName.reset();
+        this.searchPin(parseInt(searchPin));
+      }
+    } else {
+      this.enableSearchBtn = false;
+    }
+  }
+
+  searchPin(searchPin: number) {
+    this.commonService.getPincodeLocation(searchPin).subscribe({
+      next: response => {
+        if(response) {
+          this.pincodeResult = response;
+          sessionStorage.setItem('pincodeData', JSON.stringify(this.pincodeResult));
+          this.filterPincodeResult();
+          this.filterDistrictResult();
+          this.filterPostofficeName();
+        }
+      },
+      error: err => {
+        console.log('Error: ', err);
+      }
+    })
   }
 
 }

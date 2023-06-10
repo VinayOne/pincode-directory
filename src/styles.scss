@@ -16,15 +16,10 @@ $theme: mat.define-light-theme((
 
 @include mat.all-component-themes($theme);
 
+
 html, body { height: 100%; background-repeat: no-repeat; background-attachment: fixed;}
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; background-image: linear-gradient(to bottom, rgb(233,233,233), rgb(139, 139, 139));}
 
-/*linear-gradient(to bottom, rgb(233,233,233), rgb(139, 139, 139))*/
-// img {
-//     opacity: 0.5;
-//     position: relative;
-//     width: 100%;
-//     top: 0;
-//     left: 0;
-//     z-index: 0;
-// }
+mat-card-title {
+  color: mat.get-color-from-palette($primary, A400);
+}

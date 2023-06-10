@@ -9,9 +9,6 @@ import { CommonServiceService } from 'src/app/services/common-service.service';
 })
 export class SearchResultComponent {
 
-  items = ['Item 1', 'Item 2', 'Item 3', 'Item 4', 'Item 5'];
-  expandedIndex = 0;
-
   pincodePassedData: any;
   pincode: number = 110001;
   pincodeDetails: any;
