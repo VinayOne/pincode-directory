@@ -22,12 +22,13 @@ export class SearchComponent {
   clearPostOffice = '';
   
   enableSearchBtn = false;
+  invalidPincode = false;
 
   pincodeForm = new FormGroup({
     stateName: new FormControl('', Validators.required),
     districtName: new FormControl('', Validators.required),
     postOfficeName: new FormControl('', Validators.required),
-    pinCode: new FormControl('')
+    pinCode: new FormControl('',Validators.pattern("^[0-9]*$"))
   });
 
   constructor(private commonService: CommonServiceService, private router: Router) {}
@@ -114,18 +115,24 @@ export class SearchComponent {
    const singlePincode = this.pincodeResult.result.map((item: any) => {
       return item.Pincode;
     });
-    this.singlePincode = singlePincode[0];
-    console.log(singlePincode[0]);
+    if(singlePincode[0]) {
+      this.invalidPincode = false;
+      this.singlePincode = singlePincode[0];
+      console.log(singlePincode[0]);
+    } else {
+      this.invalidPincode = true;
+      return;     
+    }
   }
 
   filterDistrictResult() {
     const selectedDistrict = this.pincodeResult.result[0].District?.replace(/[^a-zA-Z0-9 ]/g, '') || '';
-    this.clearDistrictName = selectedDistrict;
+    if(selectedDistrict) this.clearDistrictName = selectedDistrict;    
   }
 
   filterPostofficeName() {
     const selectedPostOffice = this.pincodeResult.result[0].PostOffice?.replace(/[^a-zA-Z0-9 ]/g, '') || '';
-    this.clearPostOffice = selectedPostOffice;
+    if(selectedPostOffice) this.clearPostOffice = selectedPostOffice;    
   }
 
   checkValidity() {

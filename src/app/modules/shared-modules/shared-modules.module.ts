@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
+import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HeaderComponent } from 'src/app/shared/header/header.component';
 import { FooterComponent } from 'src/app/shared/footer/footer.component';
@@ -17,6 +18,7 @@ import { CommonServiceService } from 'src/app/services/common-service.service';
   imports: [
     CommonModule,
     HttpClientModule,
+    RouterModule,
     FormsModule,
     ReactiveFormsModule,
     MaterialModuleModule
@@ -25,6 +27,7 @@ import { CommonServiceService } from 'src/app/services/common-service.service';
     HeaderComponent,
     FooterComponent,
     HttpClientModule,
+    RouterModule,
     FormsModule,
     ReactiveFormsModule,
     MaterialModuleModule

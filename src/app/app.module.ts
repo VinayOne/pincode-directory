@@ -9,6 +9,9 @@ import { SharedModulesModule } from './modules/shared-modules/shared-modules.mod
 import { SearchResultComponent } from './dashboard/search-result/search-result.component';
 import { SearchComponent } from './dashboard/search/search.component';
 import { FaqComponent } from './dashboard/faq/faq.component';
+import { ArticleComponent } from './dashboard/article/article.component';
+import { StatesComponent } from './dashboard/states/states.component';
+import { VideoComponent } from './dashboard/video/video.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +19,10 @@ import { FaqComponent } from './dashboard/faq/faq.component';
     HomeComponent,
     SearchResultComponent,
     SearchComponent,
-    FaqComponent
+    FaqComponent,
+    ArticleComponent,
+    StatesComponent,
+    VideoComponent
   ],
   imports: [
     BrowserModule,

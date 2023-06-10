@@ -37,7 +37,8 @@
           <mat-form-field appearance="outline">
             <mat-label>Enter Pincode</mat-label>
             <input type="text" matInput placeholder="Enter Pincode" formControlName="pinCode" (keyup)="checkValidity()">
-          </mat-form-field>
+            <small *ngIf="invalidPincode">Please enter valid pincode.</small>
+          </mat-form-field>          
           <p>In today's fast-paced world, where communication and logistics play a vital role, having an efficient postal system is crucial. In India, one of the essential components of the postal system is the Pincode. Pincodes, also known as Postal Index Numbers, serve as unique identification numbers assigned to specific areas, helping streamline mail delivery and location identification.</p>
         </div>
       </div>
