@@ -170,8 +170,8 @@ export class SearchComponent {
   findPincodeInUrl() {
     const url = window.location.href;
     const pincode = url.match(/\d+/g) || [];
-    if(pincode[1] && pincode[1].length === 6) {
-      this.commonService.getPincodeLocation(JSON.parse(pincode[1])).subscribe({
+    if(pincode[0] && pincode[0].length === 6) {
+      this.commonService.getPincodeLocation(JSON.parse(pincode[0])).subscribe({
         next: response => {
           if(response) {
             this.pincodeResult = response;
