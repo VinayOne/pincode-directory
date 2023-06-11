@@ -28,6 +28,10 @@ mat-card-title {
   color: mat.get-color-from-palette($primary, A400);
 }
 
+.primary-color {
+  color: mat.get-color-from-palette($primary, A400);
+}
+
 /* width */
 ::-webkit-scrollbar {
   width: 10px;
