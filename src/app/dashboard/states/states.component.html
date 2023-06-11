@@ -1,16 +1,36 @@
 <div class="row mt-2">
     <div class="col-12">
         <mat-card>
-            <mat-card-header>
-                <mat-card-title>
-                    <p>Explore State Wise Pincodes</p>
-                </mat-card-title>
-            </mat-card-header>
             <mat-card-content>
-                <table class="table table-bordered">
+                <div class="row">
+                    <div class="col-10">
+                        <h3 class="primary-color" *ngIf="!showDistrictList && !showPoList">Explore State Wise Pincodes</h3>
+                        <h3 class="primary-color" *ngIf="showDistrictList && !showPoList">Districts of {{selectedState}}</h3>
+                        <h3 class="primary-color" *ngIf="!showDistrictList && showPoList">Select post office for {{selectedDistrict}}</h3>
+                    </div>
+                    <div class="col-2">
+                        <button type="button" *ngIf="showDistrictList && !showPoList" class="float-end" mat-raised-button color="primary" (click)="backToStates()">Back</button>
+                        <button type="button" *ngIf="!showDistrictList && showPoList" class="float-end" mat-raised-button color="primary" (click)="backToDistricts()">Back</button>
+                    </div>
+                </div>
+                <table class="table table-bordered" *ngIf="!showDistrictList && !showPoList">
                     <tbody>
                         <tr *ngFor="let state of stateList?.result">
-                          <td><a href="">{{state}}</a></td>
+                          <td><a class="stateLink" (click)="onStateSelect(state)">{{state}}</a></td>
+                        </tr>                        
+                      </tbody>
+                </table>
+                <table class="table table-bordered" *ngIf="showDistrictList && !showPoList">
+                    <tbody>
+                        <tr *ngFor="let district of districtList?.result">
+                          <td><a class="stateLink" (click)="onDistrictSelect(district)">{{district}}</a></td>
+                        </tr>                        
+                      </tbody>
+                </table>
+                <table class="table table-bordered" *ngIf="showPoList">
+                    <tbody>
+                        <tr *ngFor="let postOffice of poList?.result">
+                          <td><a class="stateLink" (click)="onPostOfficeSelect(postOffice)">{{postOffice}}</a></td>
                         </tr>                        
                       </tbody>
                 </table>

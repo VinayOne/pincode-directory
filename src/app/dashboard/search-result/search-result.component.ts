@@ -28,7 +28,7 @@ export class SearchResultComponent {
     } else {
       if(this.pincodePassedData) this.getPincodeDetails();
     }
-    this.titleService.setTitle(`PIN CODE ${this.pincodeDetails?.result[0]?.Pincode} - ${this.pincodeDetails?.result[0]?.VillageLocality} - ${this.pincodeDetails?.result[0]?.PostOffice} - ${this.pincodeDetails?.result[0]?.State}`);
+    this.titleService.setTitle(`Pin Code: ${this.pincodeDetails?.result[0]?.Pincode} - ${this.pincodeDetails?.result[0]?.VillageLocality} - ${this.pincodeDetails?.result[0]?.PostOffice} - ${this.pincodeDetails?.result[0]?.State}`);
   }
 
   getPincodeDetails() {

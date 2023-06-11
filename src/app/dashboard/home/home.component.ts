@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-home',
@@ -7,6 +8,12 @@ import { Component } from '@angular/core';
 })
 export class HomeComponent {
 
- 
+ pageTitle = 'Pincode Directory | Find Current Location Pin Code';
+
+ constructor(private titleService: Title) {}
+
+ ngOnInit(): void{
+  this.titleService.setTitle(this.pageTitle);
+ }
 
 }
