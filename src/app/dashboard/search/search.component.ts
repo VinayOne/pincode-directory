@@ -35,6 +35,7 @@ export class SearchComponent {
 
   ngOnInit(): void {
     this.getStateList();
+    this.findPincodeInUrl();
   }
 
   getStateList() {
@@ -165,6 +166,32 @@ export class SearchComponent {
         console.log('Error: ', err);
       }
     })
+  }
+
+  findPincodeInUrl() {
+    const url = window.location.href;
+    const pincode = url.match(/\d+/g) || [];
+    if(pincode[0] && pincode[0].length === 6) {
+      this.commonService.getPincodeLocation(JSON.parse(pincode[0])).subscribe({
+        next: response => {
+          if(response) {
+            this.pincodeResult = response;
+            sessionStorage.setItem('pincodeData', JSON.stringify(this.pincodeResult));
+            this.filterPincodeResult();
+            this.filterDistrictResult();
+            this.filterPostofficeName();
+            setTimeout(() => {
+              this.onSubmit();
+            },500);
+          }
+        },
+        error: err => {
+          console.log('Error: ', err);
+        }
+      })
+    } else {
+      console.error('Error: Invalid PIN Code in URL');
+    }
   }
 
 }
