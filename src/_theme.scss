@@ -16,5 +16,5 @@
 // $accent: map-get($color, accent);
 // $warn: map-get($color, warn);
 
-@use '@angular/material' as mat;
-$primary: mat.define-palette(mat.$deep-purple-palette);
+// @use '@angular/material' as mat;
+// $primary: mat.define-palette(mat.$deep-purple-palette);
