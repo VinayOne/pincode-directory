@@ -35,7 +35,7 @@ export class AppComponent {
     const payLoad = {
       ip : this.visitorData.ip,
       country: this.visitorData.country_name,
-      datetime: this.currentTime
+      visitedtime: this.currentTime
     }
 
     this.commonService.captureVisitorData(payLoad).subscribe({
