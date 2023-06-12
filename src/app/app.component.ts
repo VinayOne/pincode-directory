@@ -16,7 +16,11 @@ export class AppComponent {
   ngOnInit(): void{
     this.fetchVisitorDetails();
     setTimeout(() => {
-      this.captureVisitorDetails();
+      if(this.visitorData.ip !== '125.99.240.100') {
+        this.captureVisitorDetails();
+      } else {
+        console.info('Developer Visit');
+      }     
     }, 1000)
   }
 
@@ -40,7 +44,7 @@ export class AppComponent {
 
     this.commonService.captureVisitorData(payLoad).subscribe({
       next: response => {
-        if(response) console.log(response);
+        if(response) console.info('STATUS 200 - OK');
       },
       error: err => {
         console.error('Error: ', err);
