@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonServiceService } from './services/common-service.service';
+import { Meta, Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-root',
@@ -11,9 +12,19 @@ export class AppComponent {
   visitorData: any;
   currentTime = new Date();
 
-  constructor(private commonService: CommonServiceService) {}
+  constructor(private commonService: CommonServiceService, private titleService: Title, private meta: Meta) {  }
 
   ngOnInit(): void{
+    this.meta.addTags([
+      {name: 'discription', content: 'Get your street or area Pin Code with this easy to use Pincode Directory! Find your current location Pin Code with this quick and easy online tool. Ex URL: https://pincode.directory/110054'},
+      {name: 'author' , content: 'Vinay Kumar Munda'},
+      {name: 'robots', content: 'index, follow'},
+      {name: 'viewport', content: 'width=device-width, initial-scale=1'},
+      {name: 'keywords', content: 'pincode, pincode of my location, current location pin code, my current location pin code, my area pin code'},
+      {name: 'date', content: '2023-06-13', scheme: 'YYYY-MM-DD'},
+      {charset: 'UTF-8'}
+    ]);
+    
     this.fetchVisitorDetails();
     setTimeout(() => {
       if(this.visitorData.ip !== '125.99.240.100') {

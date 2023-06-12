@@ -8,9 +8,9 @@ import { Title } from '@angular/platform-browser';
 })
 export class HomeComponent {
 
- pageTitle = 'Pincode Directory | Find Current Location Pin Code';
+ pageTitle = 'Pincode Directory | Find Current Location Pin Code - Home';
 
- constructor(private titleService: Title) {}
+ constructor(private titleService: Title) { }
 
  ngOnInit(): void{
   this.titleService.setTitle(this.pageTitle);
