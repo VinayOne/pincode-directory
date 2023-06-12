@@ -37,4 +37,13 @@ export class CommonServiceService {
     const payLoad = mailObj;
     return this.http.post(`${environment.application.apiUrl}/getpincodedetails`, payLoad);
   }
+
+  getVisitorIpDetail() {
+    return this.http.get('https://api.ipgeolocation.io/ipgeo?apiKey=f620de073d29432194a9841daed4b538');
+  }
+
+  captureVisitorData(visitorData: any) {
+    const payLoad = visitorData;
+    return this.http.post(`${environment.application.apiUrl}/trafficCapture`, payLoad);
+  }
 }

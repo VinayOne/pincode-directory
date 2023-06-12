@@ -4,6 +4,7 @@ const cors = require("cors");
 
 const router = express.Router();
 const LocalityPincode = require("../models/locality-pincodes");
+const TrafficCaprure = require("../models/traffic-capture");
 
 const Mailjet = require('node-mailjet');
 const mailjet = Mailjet.apiConnect(
@@ -67,5 +68,15 @@ request.then((result) => {
 })
 
 });
+
+router.route('/trafficCapture').post(async (req, res) => {
+  const visitor = new TrafficCaprure({
+    ip : req.body.ip,
+    country : req.body.country, 
+    datetime : req.body.visitedtime
+  });
+  await visitor.save();
+  res.status(200).json({'message': 'Traffic Saved Successfully'});
+})
 
 module.exports = router;

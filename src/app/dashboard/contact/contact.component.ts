@@ -17,6 +17,10 @@ export class ContactComponent {
     visitorText: new FormControl('', Validators.required)
   });
 
+  ngOnInit(): void {
+
+  }
+
   constructor(private commonService: CommonServiceService) {}
 
   onSubmit() {
