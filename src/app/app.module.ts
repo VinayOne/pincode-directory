@@ -12,6 +12,7 @@ import { FaqComponent } from './dashboard/faq/faq.component';
 import { ArticleComponent } from './dashboard/article/article.component';
 import { StatesComponent } from './dashboard/states/states.component';
 import { VideoComponent } from './dashboard/video/video.component';
+import { ContactComponent } from './dashboard/contact/contact.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { VideoComponent } from './dashboard/video/video.component';
     FaqComponent,
     ArticleComponent,
     StatesComponent,
-    VideoComponent
+    VideoComponent,
+    ContactComponent
   ],
   imports: [
     BrowserModule,

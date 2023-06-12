@@ -101,7 +101,7 @@ export class StatesComponent {
           setTimeout(() => {
             this.viewResult();
             window.scrollTo(0, 0);
-          }, 300)        
+          }, 300)
         }
       },
       error: err => {

@@ -32,4 +32,9 @@ export class CommonServiceService {
     const payload = {'pc' : pin}
     return this.http.post(`${environment.application.apiUrl}/getpincodedetails`, payload);
   }
+
+  mailService(mailObj: any) {
+    const payLoad = mailObj;
+    return this.http.post(`${environment.application.apiUrl}/getpincodedetails`, payLoad);
+  }
 }

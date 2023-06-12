@@ -3,6 +3,7 @@ const path = require('path');
 const app = express();
 const mongoose = require("mongoose");
 const cors = require("cors");
+const requestIp = require('request-ip');
 const routes = require("./routes/routes");
 
 const url = `mongodb+srv://vinayone:12Ekq1qw9Dh1G5J1@cluster0.5vd7f.mongodb.net/indian-pincodes?retryWrites=true&w=majority`;
@@ -16,6 +17,7 @@ mongoose.connect(url, connectionParams)
     .then( () => {
     app.use(express.json());
     app.use(cors());
+    app.use(requestIp.mw());
 
 		app.use(express.static(path.join(__dirname, "dist", "pincode-directory")));
 

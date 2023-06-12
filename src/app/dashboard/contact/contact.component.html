@@ -1,0 +1,28 @@
+<div class="row mt-2">
+    <div class="col-12">
+        <mat-card>
+            <mat-card-header class="mb-3">
+                <mat-card-title>Contact / Feedback</mat-card-title>
+                <mat-card-subtitle>We always welcome your feeback & suggestions.</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content>
+            <form [formGroup]="feedbackForm" (ngSubmit)="onSubmit()">
+                <mat-form-field appearance="outline">
+                    <mat-label>Name</mat-label>
+                    <input type="text" matInput formControlName="visitorName" />
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>Email</mat-label>
+                    <input type="email" matInput formControlName="visitorEmail" />
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>Message</mat-label>
+                    <textarea matInput formControlName="visitorText"></textarea>
+                </mat-form-field>
+                <small class="primary-color" *ngIf="mailSent"><strong>Message Sent!</strong></small>
+                <button class="float-end" color="primary" mat-raised-button [disabled]="!feedbackForm.valid">Send</button>
+            </form>
+            </mat-card-content>
+        </mat-card>
+    </div>
+</div>
