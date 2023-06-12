@@ -189,7 +189,7 @@ export class SearchComponent {
         }
       })
     } else {
-      console.error('Error: Invalid PIN Code in URL');
+      console.info('Error: Invalid Or No Pin Code in URL');
     }
   }
 

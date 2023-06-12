@@ -5,6 +5,11 @@ import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HeaderComponent } from 'src/app/shared/header/header.component';
 import { FooterComponent } from 'src/app/shared/footer/footer.component';
+import { FaqComponent } from 'src/app/dashboard/faq/faq.component';
+import { VideoComponent } from 'src/app/dashboard/video/video.component';
+import { StatesComponent } from 'src/app/dashboard/states/states.component';
+import { SearchComponent } from 'src/app/dashboard/search/search.component';
+import { ContactComponent } from 'src/app/dashboard/contact/contact.component';
 import { MaterialModuleModule } from '../material-module/material-module.module';
 import { CommonServiceService } from 'src/app/services/common-service.service';
 
@@ -13,7 +18,12 @@ import { CommonServiceService } from 'src/app/services/common-service.service';
 @NgModule({
   declarations: [
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    FaqComponent,
+    VideoComponent,
+    StatesComponent,
+    SearchComponent,
+    ContactComponent
   ],
   imports: [
     CommonModule,
@@ -21,7 +31,7 @@ import { CommonServiceService } from 'src/app/services/common-service.service';
     RouterModule,
     FormsModule,
     ReactiveFormsModule,
-    MaterialModuleModule
+    MaterialModuleModule,
   ], 
   exports: [
     HeaderComponent,
@@ -30,7 +40,12 @@ import { CommonServiceService } from 'src/app/services/common-service.service';
     RouterModule,
     FormsModule,
     ReactiveFormsModule,
-    MaterialModuleModule
+    MaterialModuleModule,
+    FaqComponent,
+    VideoComponent,
+    StatesComponent,
+    SearchComponent,
+    ContactComponent
   ],
   providers: [
     CommonServiceService

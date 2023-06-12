@@ -4,27 +4,19 @@ import { BrowserModule, Title } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './dashboard/home/home.component';
+import { NotfoundComponent } from './notfound/notfound.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SharedModulesModule } from './modules/shared-modules/shared-modules.module';
 import { SearchResultComponent } from './dashboard/search-result/search-result.component';
-import { SearchComponent } from './dashboard/search/search.component';
-import { FaqComponent } from './dashboard/faq/faq.component';
 import { ArticleComponent } from './dashboard/article/article.component';
-import { StatesComponent } from './dashboard/states/states.component';
-import { VideoComponent } from './dashboard/video/video.component';
-import { ContactComponent } from './dashboard/contact/contact.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
+    NotfoundComponent,
     SearchResultComponent,
-    SearchComponent,
-    FaqComponent,
-    ArticleComponent,
-    StatesComponent,
-    VideoComponent,
-    ContactComponent
+    ArticleComponent
   ],
   imports: [
     BrowserModule,
