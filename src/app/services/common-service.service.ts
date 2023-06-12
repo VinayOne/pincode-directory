@@ -34,8 +34,7 @@ export class CommonServiceService {
   }
 
   mailService(mailObj: any) {
-    const payLoad = mailObj;
-    return this.http.post(`${environment.application.apiUrl}/getpincodedetails`, payLoad);
+    return this.http.post(`${environment.application.apiUrl}/sendmail`, mailObj);
   }
 
   getVisitorIpDetail() {
