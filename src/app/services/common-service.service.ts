@@ -43,7 +43,6 @@ export class CommonServiceService {
   }
 
   captureVisitorData(visitorData: any) {
-    const payLoad = visitorData;
-    return this.http.post(`${environment.application.apiUrl}/trafficCapture`, payLoad);
+    return this.http.post(`${environment.application.apiUrl}/trafficCapture`, visitorData);
   }
 }

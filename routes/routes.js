@@ -4,7 +4,7 @@ const cors = require("cors");
 
 const router = express.Router();
 const LocalityPincode = require("../models/locality-pincodes");
-const TrafficCaprure = require("../models/traffic-capture");
+const TrafficCaprure = require("../models/traffic-captures");
 
 const Mailjet = require('node-mailjet');
 const mailjet = Mailjet.apiConnect(

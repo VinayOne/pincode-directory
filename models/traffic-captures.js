@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema({
 	ip: String,
     country: String,
-	datetime: Date
+	datetime: String
 });
 
-module.exports = mongoose.model("traffic-capture", Schema);
+module.exports = mongoose.model("traffic-captures", Schema);
