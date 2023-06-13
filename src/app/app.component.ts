@@ -13,6 +13,7 @@ export class AppComponent {
   title = 'pincode-directory';
   visitorData: any;
   currentTime = new Date();
+  excludeIpList = ['125.99.240.100', '144.24.59.157'];
 
   constructor(
     @Inject(PLATFORM_ID) private platformId: any,
@@ -23,8 +24,9 @@ export class AppComponent {
 
   ngOnInit(): void{    
     this.fetchVisitorDetails();
+    console.log(this.excludeIpList.includes(this.visitorData))
     setTimeout(() => {
-      if(this.visitorData.ip !== '125.99.240.100' || this.visitorData.ip !== '144.24.59.157') {
+      if(!this.excludeIpList.includes(this.visitorData.ip)) {
         this.captureVisitorDetails();
       } else {
         console.info('Developer Visit');
