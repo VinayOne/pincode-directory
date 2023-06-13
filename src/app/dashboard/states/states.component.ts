@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { CommonServiceService } from 'src/app/services/common-service.service';
+import { LocalstorageService } from 'src/app/services/localstorage.service';
 
 @Component({
   selector: 'app-states',
@@ -23,10 +24,14 @@ export class StatesComponent {
   clearDistrictName: string = '';
   clearPostOffice: string = '';
 
-  constructor(private commonService: CommonServiceService, private router: Router) {}
+  constructor(
+    private commonService: CommonServiceService, 
+    private router: Router,
+    private localStorage: LocalstorageService
+    ) {}
 
   ngOnInit(): void{
-    const states = sessionStorage.getItem('stateList') || '';
+    const states = this.localStorage.getItem('stateList') || '';
     if(states) {
       this.stateList = JSON.parse(states);
     } else {
@@ -39,7 +44,7 @@ export class StatesComponent {
       next: response => {
         if(response) {
           this.stateList = response;
-          sessionStorage.setItem('stateList', JSON.stringify(this.stateList));
+          this.localStorage.setItem('stateList', JSON.stringify(this.stateList));
         }
       },
       error: err => {
@@ -94,7 +99,7 @@ export class StatesComponent {
       next: response => {
         if(response) {
           this.pincodeResult = response;
-          sessionStorage.setItem('pincodeData', JSON.stringify(this.pincodeResult));
+          this.localStorage.setItem('pincodeData', JSON.stringify(this.pincodeResult));
           this.filterPincodeResult();
           this.filterDistrictResult();
           this.filterPostofficeName();

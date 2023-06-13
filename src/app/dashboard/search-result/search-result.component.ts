@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Meta, Title } from '@angular/platform-browser';
 import { CommonServiceService } from 'src/app/services/common-service.service';
+import { LocalstorageService } from 'src/app/services/localstorage.service';
 
 @Component({
   selector: 'app-search-result',
@@ -14,7 +15,12 @@ export class SearchResultComponent {
   pincode: number = 110001;
   pincodeDetails: any;
 
-  constructor(private route: ActivatedRoute, private commonService: CommonServiceService, private titleService: Title, private meta: Meta) {
+  constructor(private route: ActivatedRoute, 
+    private commonService: CommonServiceService, 
+    private titleService: Title, 
+    private meta: Meta,
+    private localStorage: LocalstorageService
+    ) {
     this.route.paramMap.subscribe(params => {
       this.pincodePassedData = params;
       this.pincode = this.pincodePassedData.params.pincode;
@@ -22,7 +28,7 @@ export class SearchResultComponent {
   }
 
   ngOnInit() {
-    const pincodeData = sessionStorage.getItem('pincodeData') || null;
+    const pincodeData = this.localStorage.getItem('pincodeData') || null;
     if (pincodeData) {
       this.pincodeDetails = JSON.parse(pincodeData);
     } else {

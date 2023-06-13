@@ -1,6 +1,8 @@
-import { Component } from '@angular/core';
+import { Component,Inject, PLATFORM_ID } from '@angular/core';
 import { CommonServiceService } from './services/common-service.service';
 import { Meta, Title } from '@angular/platform-browser';
+import {BehaviorSubject} from 'rxjs';
+import {isPlatformBrowser} from '@angular/common';
 
 @Component({
   selector: 'app-root',
@@ -8,11 +10,18 @@ import { Meta, Title } from '@angular/platform-browser';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+  static isBrowser = new BehaviorSubject<boolean>(false);
   title = 'pincode-directory';
   visitorData: any;
   currentTime = new Date();
 
-  constructor(private commonService: CommonServiceService, private titleService: Title, private meta: Meta) {  }
+  constructor(
+    @Inject(PLATFORM_ID) private platformId: any,
+    private commonService: CommonServiceService, 
+    private titleService: Title, private meta: Meta
+    ) {
+      AppComponent.isBrowser.next(isPlatformBrowser(platformId));
+      }
 
   ngOnInit(): void{
     this.meta.addTags([
