@@ -10,37 +10,76 @@
           <div class="mb-3">
             <mat-form-field appearance="outline" class="example-full-width">
               <mat-label>Select State</mat-label>
-              <mat-select formControlName="stateName" (selectionChange)="onStateSelect()">
-                <mat-option *ngFor="let state of states?.result" [value]="state">{{state}}</mat-option>
-              </mat-select>
+              <input type="text" placeholder="Type State" aria-label="Select State" matInput formControlName="stateName"
+                [matAutocomplete]="statelist">
+              <mat-icon matSuffix>
+                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="grey" class="bi bi-caret-down-fill"
+                  viewBox="0 0 16 16">
+                  <path
+                    d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
+                </svg>
+              </mat-icon>
+              <mat-autocomplete autoActiveFirstOption #statelist="matAutocomplete" (optionSelected)="onStateSelect()">
+                <mat-option *ngFor="let state of filteredStates | async" [value]="state">
+                  {{state}}
+                </mat-option>
+              </mat-autocomplete>
             </mat-form-field>
           </div>
           <div class="mb-3">
-            <mat-form-field appearance="outline">
+            <mat-form-field appearance="outline" class="example-full-width">
               <mat-label>Select District</mat-label>
-              <mat-select formControlName="districtName" (selectionChange)="onDistrictSelect()">
-                <mat-option *ngFor="let district of districts?.result" [value]="district">{{district}}</mat-option>
-              </mat-select>
+              <input type="text" placeholder="Type District" aria-label="Select District" matInput formControlName="districtName"
+                [matAutocomplete]="districtlist">
+                  <mat-spinner *ngIf="showDistrictSpinner" class="spinner" color="primary" matSuffix mode="indeterminate"></mat-spinner>
+              <mat-icon matSuffix *ngIf="!showDistrictSpinner">
+                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="grey" class="bi bi-caret-down-fill"
+                  viewBox="0 0 16 16">
+                  <path
+                    d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
+                </svg>
+              </mat-icon>
+              <mat-autocomplete autoActiveFirstOption #districtlist="matAutocomplete" (optionSelected)="onDistrictSelect()">
+                <mat-option *ngFor="let district of filteredDistricts | async" [value]="district">
+                  {{district}}
+                </mat-option>
+              </mat-autocomplete>
             </mat-form-field>
           </div>
           <div class="mb-3">
-            <mat-form-field appearance="outline">
+            <mat-form-field appearance="outline" class="example-full-width">
               <mat-label>Select Post Office</mat-label>
-              <mat-select formControlName="postOfficeName" (selectionChange)="onPostOfficeSelect()">
-                <mat-option *ngFor="let po of postOffices?.result" [value]="po">{{po}}</mat-option>
-              </mat-select>
+              <input type="text" placeholder="Type Post Office Location" aria-label="Select Post Office" matInput formControlName="postOfficeName"
+                [matAutocomplete]="postofficelist">
+                <mat-spinner *ngIf="showPostOfficeSpinner" class="spinner" color="primary" matSuffix mode="indeterminate"></mat-spinner>
+              <mat-icon matSuffix *ngIf="!showPostOfficeSpinner">
+                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="grey" class="bi bi-caret-down-fill"
+                  viewBox="0 0 16 16">
+                  <path
+                    d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
+                </svg>
+              </mat-icon>
+              <mat-autocomplete autoActiveFirstOption #postofficelist="matAutocomplete" (optionSelected)="onPostOfficeSelect()">
+                <mat-option *ngFor="let po of filteredPostOffices | async" [value]="po">
+                  {{po}}
+                </mat-option>
+              </mat-autocomplete>
             </mat-form-field>
           </div>
         </div>
-        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">          
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
           <p>Search Location By Pincode</p>
           <mat-form-field appearance="outline">
             <mat-label>Enter Pincode</mat-label>
             <input type="text" matInput placeholder="Enter Pincode" formControlName="pinCode" (keyup)="checkValidity()">
             <small *ngIf="invalidPincode">Please enter valid pincode.</small>
           </mat-form-field>
-          <p>In today's fast-paced world, where communication and logistics play a vital role, having an efficient postal system is crucial. In India, one of the essential components of the postal system is the Pincode. Pincodes, also known as Postal Index Numbers, serve as unique identification numbers assigned to specific areas, helping streamline mail delivery and location identification.</p>
-          <p>Search pincode directly from url. Follow below example: <span>https://pincode.directory/<strong class="primary-color">110054</strong></span></p>           
+          <p>In today's fast-paced world, where communication and logistics play a vital role, having an efficient
+            postal system is crucial. In India, one of the essential components of the postal system is the Pincode.
+            Pincodes, also known as Postal Index Numbers, serve as unique identification numbers assigned to specific
+            areas, helping streamline mail delivery and location identification.</p>
+          <p>Search pincode directly from url. Follow below example: <span>https://pincode.directory/<strong
+                class="primary-color">110054</strong></span></p>
         </div>
       </div>
       <button type="button" class="float-end" mat-raised-button color="primary" (click)="onSubmit()"

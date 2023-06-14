@@ -9,6 +9,8 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {CdkAccordionModule} from '@angular/cdk/accordion';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatDividerModule} from '@angular/material/divider';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 
 @NgModule({
@@ -25,7 +27,9 @@ import {MatDividerModule} from '@angular/material/divider';
     MatFormFieldModule,
     CdkAccordionModule,
     MatMenuModule,
-    MatDividerModule
+    MatDividerModule,
+    MatAutocompleteModule,
+    MatProgressSpinnerModule
   ]
 })
 export class MaterialModuleModule { }

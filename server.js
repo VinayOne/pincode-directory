@@ -19,13 +19,13 @@ mongoose.connect(url, connectionParams)
     app.use(cors());
     app.use(requestIp.mw());
 
-		app.use(express.static(path.join(__dirname, "dist", "pincode-directory")));
+		// app.use(express.static(path.join(__dirname, "dist", "pincode-directory")));
 
 		app.use("/api", routes);
 
-		app.get('*', (req, res) => {
-		  res.sendFile(path.join(__dirname, "dist", "pincode-directory", "index.html"));
-		});
+		// app.get('*', (req, res) => {
+		//   res.sendFile(path.join(__dirname, "dist", "pincode-directory", "index.html"));
+		// });
 
 		const port = process.env.PORT || 3200;
 

@@ -1,5 +1,8 @@
 import { Component, EventEmitter, Output, Inject, PLATFORM_ID } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Observable } from 'rxjs';
+import { map, startWith } from 'rxjs/operators';
+import { NgFor, AsyncPipe } from '@angular/common';
 import { CommonServiceService } from 'src/app/services/common-service.service';
 import { Router } from '@angular/router'
 import { LocalstorageService } from 'src/app/services/localstorage.service';
@@ -14,45 +17,72 @@ import { WindowRef } from '../../services/window.service';
 export class SearchComponent {
 
   @Output('callPinSearch') callPinSearch: EventEmitter<any> = new EventEmitter();
-  
-  states: any;
-  districts: any;
-  postOffices: any;
+
+  //stateList: any;
+  states: string[] = [];
+  filteredStates?: Observable<string[]>;
+  districts: string[] = [];
+  showDistrictSpinner = false;
+  filteredDistricts?: Observable<string[]>;
+  postOffices: string[] = [];
+  showPostOfficeSpinner = false;
+  filteredPostOffices?: Observable<string[]>;
   pincodeResult: any;
 
   singlePincode: any;
   clearDistrictName = '';
   clearPostOffice = '';
-  
+
   enableSearchBtn = false;
   invalidPincode = false;
   browserUrl: string = '';
 
   pincodeForm = new FormGroup({
     stateName: new FormControl('', Validators.required),
-    districtName: new FormControl('', Validators.required),
-    postOfficeName: new FormControl('', Validators.required),
-    pinCode: new FormControl('',Validators.pattern("^[0-9]*$"))
+    districtName: new FormControl({ value: '', disabled: true }, Validators.required),
+    postOfficeName: new FormControl({ value: '', disabled: true }, Validators.required),
+    pinCode: new FormControl('', Validators.pattern("^[0-9]*$"))
   });
 
   constructor(
-    private commonService: CommonServiceService, 
+    private commonService: CommonServiceService,
     private router: Router,
     private localStorage: LocalstorageService,
     @Inject(PLATFORM_ID) private platformId: any,
     private windowRef: WindowRef
-    ) {}
+  ) { }
 
   ngOnInit(): void {
     this.getStateList();
     this.findPincodeInUrl();
   }
 
+  private _filterState(value: string): string[] {
+    const filterValue = value.toLowerCase();
+    return this.states.filter((state) => state.toLowerCase().includes(filterValue));
+  }
+
+  private _filterDistrict(value: string): string[] {
+    const filterValue = value.toLowerCase();
+    return this.districts.filter((district) => district.toLowerCase().includes(filterValue));
+  }
+
+  private _filterPostoffice(value: string): string[] {
+    const filterValue = value.toLowerCase();
+    return this.postOffices.filter((po) => po.toLowerCase().includes(filterValue));
+  }
+
   getStateList() {
+    let stateList: any;
     this.commonService.getStateList().subscribe({
       next: response => {
-        if(response) {
-          this.states = response;
+        if (response) {
+          stateList = response;
+          this.states = stateList.result;
+          this.filteredStates = this.pincodeForm.controls['stateName'].valueChanges.pipe(
+            startWith(''),
+            map(value => this._filterState(value || '')),
+          );
         }
       },
       error: err => {
@@ -62,11 +92,21 @@ export class SearchComponent {
   }
 
   onStateSelect() {
+    this.showDistrictSpinner = true;
+    this.pincodeForm.controls.districtName.reset();
+    let districtList: any;
     const selectedState: string = this.pincodeForm.value.stateName || '';
     this.commonService.getsDistrictList(selectedState).subscribe({
       next: response => {
-        if(response) {
-          this.districts = response;
+        if (response) {
+          districtList = response;
+          this.districts = districtList.result;
+          this.showDistrictSpinner = false;
+          this.pincodeForm.controls.districtName.enable();
+          this.filteredDistricts = this.pincodeForm.controls['districtName'].valueChanges.pipe(
+            startWith(''),
+            map(value => this._filterDistrict(value || '')),
+          );
           this.pincodeForm.controls.pinCode.reset();
         }
       },
@@ -77,11 +117,21 @@ export class SearchComponent {
   }
 
   onDistrictSelect() {
+    this.showPostOfficeSpinner = true;
+    this.pincodeForm.controls.postOfficeName.reset();
+    let postOfficeList: any;
     const selectedDistrict: string = this.pincodeForm.value.districtName || '';
     this.commonService.getsPostOfficeList(selectedDistrict).subscribe({
       next: response => {
-        if(response) {
-          this.postOffices = response;
+        if (response) {
+          postOfficeList = response;
+          this.postOffices = postOfficeList.result;
+          this.showPostOfficeSpinner = false;
+          this.pincodeForm.controls.postOfficeName.enable();
+          this.filteredPostOffices = this.pincodeForm.controls['postOfficeName'].valueChanges.pipe(
+            startWith(''),
+            map(value => this._filterPostoffice(value || '')),
+          );
           this.checkValidity();
         }
       },
@@ -95,7 +145,7 @@ export class SearchComponent {
     const selectedPostOffice: string = this.pincodeForm.value.postOfficeName || '';
     this.commonService.getPincodeByPo(selectedPostOffice).subscribe({
       next: response => {
-        if(response) {
+        if (response) {
           this.pincodeResult = response;
           this.localStorage.setItem('pincodeData', JSON.stringify(this.pincodeResult));
           this.filterPincodeResult();
@@ -110,7 +160,7 @@ export class SearchComponent {
     })
   }
 
-  onSubmit(){
+  onSubmit() {
     const pincodeData = {
       selectedState: this.pincodeResult.result[0].State.toLowerCase().split(' ').join('-'),
       selectedDistrict: this.clearDistrictName?.toLowerCase().split(' ').join('-'),
@@ -123,33 +173,33 @@ export class SearchComponent {
   }
 
   filterPincodeResult() {
-   const singlePincode = this.pincodeResult.result.map((item: any) => {
+    const singlePincode = this.pincodeResult.result.map((item: any) => {
       return item.Pincode;
     });
-    if(singlePincode[0]) {
+    if (singlePincode[0]) {
       this.invalidPincode = false;
       this.singlePincode = singlePincode[0];
     } else {
       this.invalidPincode = true;
-      return;     
+      return;
     }
   }
 
   filterDistrictResult() {
     const selectedDistrict = this.pincodeResult.result[0].District?.replace(/[^a-zA-Z0-9 ]/g, '') || '';
-    if(selectedDistrict) this.clearDistrictName = selectedDistrict;    
+    if (selectedDistrict) this.clearDistrictName = selectedDistrict;
   }
 
   filterPostofficeName() {
     const selectedPostOffice = this.pincodeResult.result[0].PostOffice?.replace(/[^a-zA-Z0-9 ]/g, '') || '';
-    if(selectedPostOffice) this.clearPostOffice = selectedPostOffice;    
+    if (selectedPostOffice) this.clearPostOffice = selectedPostOffice;
   }
 
   checkValidity() {
     const searchPin = this.pincodeForm.value.pinCode || '';
-    if(searchPin.length === 6 || this.pincodeForm.valid) {
+    if (searchPin.length === 6 || this.pincodeForm.valid) {
       this.enableSearchBtn = true;
-      if(searchPin.length === 6) {
+      if (searchPin.length === 6) {
         this.pincodeForm.controls.stateName.reset();
         this.pincodeForm.controls.districtName.reset();
         this.pincodeForm.controls.postOfficeName.reset();
@@ -163,7 +213,7 @@ export class SearchComponent {
   searchPin(searchPin: number) {
     this.commonService.getPincodeLocation(searchPin).subscribe({
       next: response => {
-        if(response) {
+        if (response) {
           this.pincodeResult = response;
           this.localStorage.setItem('pincodeData', JSON.stringify(this.pincodeResult));
           this.filterPincodeResult();
@@ -178,14 +228,14 @@ export class SearchComponent {
   }
 
   findPincodeInUrl() {
-    if(isPlatformBrowser(this.platformId)) {
+    if (isPlatformBrowser(this.platformId)) {
       this.browserUrl = this.windowRef.nativeWindow.location.href;
-    }    
+    }
     const pincode = this.browserUrl.match(/\d+/g) || [];
-    if(pincode[0] && pincode[0].length === 6) {
+    if (pincode[0] && pincode[0].length === 6) {
       this.commonService.getPincodeLocation(JSON.parse(pincode[0])).subscribe({
         next: response => {
-          if(response) {
+          if (response) {
             this.pincodeResult = response;
             this.localStorage.setItem('pincodeData', JSON.stringify(this.pincodeResult));
             this.filterPincodeResult();
@@ -193,7 +243,7 @@ export class SearchComponent {
             this.filterPostofficeName();
             setTimeout(() => {
               this.onSubmit();
-            },300);
+            }, 300);
           }
         },
         error: err => {
