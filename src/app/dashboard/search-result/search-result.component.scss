@@ -16,3 +16,7 @@ $primary: mat.define-palette(mat.$deep-purple-palette);
     padding: 7px 7px;
     border-radius: 5px;
   }
+
+  .mat-mdc-form-field {
+    min-width: 100%;
+}

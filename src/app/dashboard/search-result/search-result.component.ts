@@ -30,26 +30,37 @@ export class SearchResultComponent {
   ngOnInit() {
     const pincodeData = this.localStorage.getItem('pincodeData') || null;
     if (pincodeData) {
-      this.pincodeDetails = JSON.parse(pincodeData);
+      this.pincodeDetails = JSON.parse(pincodeData)?.result;
     } else {
       if (this.pincodePassedData) this.getPincodeDetails();
     }
-    this.titleService.setTitle(`Pin Code: ${this.pincodeDetails?.result[0]?.Pincode} - ${this.pincodeDetails?.result[0]?.VillageLocality} - ${this.pincodeDetails?.result[0]?.PostOffice} - ${this.pincodeDetails?.result[0]?.State}`);
+    this.titleService.setTitle(`Pin Code: ${this.pincodeDetails[0]?.Pincode} - ${this.pincodeDetails[0]?.VillageLocality} - ${this.pincodeDetails[0]?.PostOffice} - ${this.pincodeDetails[0]?.State}`);
     this.meta.updateTag(
-      { name: 'discription', content: `Pin code: ${this.pincodeDetails?.result[0]?.Pincode} is belong to ${this.pincodeDetails?.result[0]?.VillageLocality}, ${this.pincodeDetails?.result[0]?.PostOffice}, ${this.pincodeDetails?.result[0]?.State}` },
+      { name: 'discription', content: `Pin code: ${this.pincodeDetails[0]?.Pincode} is belong to ${this.pincodeDetails[0]?.VillageLocality}, ${this.pincodeDetails[0]?.PostOffice}, ${this.pincodeDetails[0]?.State}` },
     );
-    this.meta.updateTag({ name: 'keywords', content: `pin code ${this.pincodeDetails?.result[0]?.Pincode}, pin code ${this.pincodeDetails?.result[0]?.VillageLocality}, pin code ${this.pincodeDetails?.result[0]?.PostOffice}` });
+    this.meta.updateTag({ name: 'keywords', content: `pin code ${this.pincodeDetails[0]?.Pincode}, pin code ${this.pincodeDetails[0]?.VillageLocality}, pin code ${this.pincodeDetails[0]?.PostOffice}` });
   }
 
   getPincodeDetails() {
+    let pincodeData: any;
     this.commonService.getPincodeLocation(this.pincode).subscribe({
       next: response => {
-        if (response) this.pincodeDetails = response;
+        if (response) {
+          pincodeData = response;
+          this.pincodeDetails = pincodeData.result;
+          console.log(this.pincodeDetails);
+        }
       },
       error: err => {
         console.log('Error: ', err);
       }
     })
+  }
+
+  searchFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value.trim().toLowerCase();
+    //this.pincodeDetails = this.pincodeDetails.filter((data: any) => data.includes(filterValue));
+    console.log('filter: ', filterValue)
   }
 
 }
