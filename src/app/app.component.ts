@@ -1,7 +1,9 @@
 import { Component,Inject, PLATFORM_ID } from '@angular/core';
 import { CommonServiceService } from './services/common-service.service';
-import {BehaviorSubject} from 'rxjs';
+import {BehaviorSubject, filter} from 'rxjs';
 import {isPlatformBrowser} from '@angular/common';
+import { NavigationEnd, Router } from '@angular/router';
+import { LocalstorageService } from 'src/app/services/localstorage.service';
 
 @Component({
   selector: 'app-root',
@@ -17,9 +19,15 @@ export class AppComponent {
 
   constructor(
     @Inject(PLATFORM_ID) private platformId: any,
-    private commonService: CommonServiceService
+    private commonService: CommonServiceService,
+    private router: Router,
+    private localStorage: LocalstorageService
     ) {
       AppComponent.isBrowser.next(isPlatformBrowser(platformId));
+      this.router.events.pipe(filter((event:any) => event instanceof NavigationEnd)).subscribe((event: NavigationEnd) => {
+        this.localStorage.setItem('navigationEvent', JSON.stringify(event));
+      });
+      
       }
 
   ngOnInit(): void{    
