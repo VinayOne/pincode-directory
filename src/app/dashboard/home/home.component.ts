@@ -10,7 +10,10 @@ export class HomeComponent {
 
  pageTitle = 'Pin Code Directory | Find Current Location Pin Code';
 
- constructor(private titleService: Title, private metaService: Meta) { }
+ constructor(
+  private titleService: Title, 
+  private metaService: Meta
+  ) { }
 
  ngOnInit(): void{
   this.metaService.addTags([

@@ -13,8 +13,7 @@ import { ContactComponent } from 'src/app/dashboard/contact/contact.component';
 import { MaterialModuleModule } from '../material-module/material-module.module';
 import { CommonServiceService } from 'src/app/services/common-service.service';
 import { LocalstorageService } from 'src/app/services/localstorage.service';
-import { WindowRef } from '../../services/window.service';
-
+import { Meta, Title } from '@angular/platform-browser';
 
 
 @NgModule({
@@ -52,7 +51,8 @@ import { WindowRef } from '../../services/window.service';
   providers: [
     CommonServiceService,
     LocalstorageService,
-    WindowRef
+    Title,
+    Meta
   ]
 })
 export class SharedModulesModule { }

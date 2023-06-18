@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule, Title } from '@angular/platform-browser';
+import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -9,6 +9,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SharedModulesModule } from './modules/shared-modules/shared-modules.module';
 import { SearchResultComponent } from './dashboard/search-result/search-result.component';
 import { ArticleComponent } from './dashboard/article/article.component';
+import { GoogleTagManagerService } from "angular-google-tag-manager";
 
 @NgModule({
   declarations: [
@@ -24,7 +25,10 @@ import { ArticleComponent } from './dashboard/article/article.component';
     BrowserAnimationsModule,
     SharedModulesModule
   ],
-  providers: [Title],
+  providers: [
+    GoogleTagManagerService,
+    { provide: "googleTagManagerId", useValue: "GTM-WRZK7LR" }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

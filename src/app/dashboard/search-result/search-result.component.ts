@@ -36,7 +36,7 @@ export class SearchResultComponent {
     }
     this.titleService.setTitle(`Pin Code: ${this.pincodeDetails[0]?.Pincode} - ${this.pincodeDetails[0]?.VillageLocality} - ${this.pincodeDetails[0]?.PostOffice} - ${this.pincodeDetails[0]?.State}`);
     this.meta.updateTag(
-      { name: 'discription', content: `Pin code: ${this.pincodeDetails[0]?.Pincode} is belong to ${this.pincodeDetails[0]?.VillageLocality}, ${this.pincodeDetails[0]?.PostOffice}, ${this.pincodeDetails[0]?.State}` },
+      { name: 'description', content: `Pin code: ${this.pincodeDetails[0]?.Pincode} is belong to ${this.pincodeDetails[0]?.VillageLocality}, ${this.pincodeDetails[0]?.PostOffice}, ${this.pincodeDetails[0]?.State}` },
     );
     this.meta.updateTag({ name: 'keywords', content: `pin code ${this.pincodeDetails[0]?.Pincode}, pin code ${this.pincodeDetails[0]?.VillageLocality}, pin code ${this.pincodeDetails[0]?.PostOffice}` });
   }
