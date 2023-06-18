@@ -16,21 +16,30 @@
                 <table class="table table-bordered" *ngIf="!showDistrictList && !showPoList">
                     <tbody>
                         <tr *ngFor="let state of stateList?.result">
-                          <td><a class="stateLink" (click)="onStateSelect(state)">{{state}}</a></td>
+                          <td>
+                            <a class="stateLink" (click)="onStateSelect(state)">{{state}}</a>
+                            <mat-progress-bar *ngIf="showProgressBar" mode="indeterminate"></mat-progress-bar>
+                        </td>
                         </tr>                        
                       </tbody>
                 </table>
                 <table class="table table-bordered" *ngIf="showDistrictList && !showPoList">
                     <tbody>
                         <tr *ngFor="let district of districtList?.result">
-                          <td><a class="stateLink" (click)="onDistrictSelect(district)">{{district}}</a></td>
+                          <td>
+                            <a class="stateLink" (click)="onDistrictSelect(district)">{{district}}</a>
+                            <mat-progress-bar *ngIf="showProgressBar" mode="indeterminate"></mat-progress-bar>
+                        </td>
                         </tr>                        
                       </tbody>
                 </table>
                 <table class="table table-bordered" *ngIf="showPoList">
                     <tbody>
                         <tr *ngFor="let postOffice of poList?.result">
-                          <td><a class="stateLink" (click)="onPostOfficeSelect(postOffice)">{{postOffice}}</a></td>
+                          <td>
+                            <a class="stateLink" (click)="onPostOfficeSelect(postOffice)">{{postOffice}}</a>
+                            <mat-progress-bar *ngIf="showProgressBar" mode="indeterminate"></mat-progress-bar>
+                        </td>
                         </tr>                        
                       </tbody>
                 </table>

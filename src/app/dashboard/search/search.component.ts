@@ -1,13 +1,11 @@
-import { Component, EventEmitter, Output, Inject, PLATFORM_ID } from '@angular/core';
+import { Component, EventEmitter, Output} from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
-import { map, startWith } from 'rxjs/operators';
+import { filter, map, startWith } from 'rxjs/operators';
 import { NgFor, AsyncPipe } from '@angular/common';
 import { CommonServiceService } from 'src/app/services/common-service.service';
-import { Router } from '@angular/router'
+import { NavigationEnd, Router } from '@angular/router';
 import { LocalstorageService } from 'src/app/services/localstorage.service';
-import { isPlatformBrowser } from '@angular/common';
-import { WindowRef } from '../../services/window.service';
 
 @Component({
   selector: 'app-search',
@@ -47,14 +45,16 @@ export class SearchComponent {
   constructor(
     private commonService: CommonServiceService,
     private router: Router,
-    private localStorage: LocalstorageService,
-    @Inject(PLATFORM_ID) private platformId: any,
-    private windowRef: WindowRef
-  ) { }
+    private localStorage: LocalstorageService,   
+  ) { 
+    this.router.events.pipe(filter((event:any) => event instanceof NavigationEnd)).subscribe((event: NavigationEnd) => {
+      this.browserUrl = event.url;
+      this.findPincodeInUrl();
+    });
+  }
 
   ngOnInit(): void {
     this.getStateList();
-    this.findPincodeInUrl();
   }
 
   private _filterState(value: string): string[] {
@@ -228,9 +228,6 @@ export class SearchComponent {
   }
 
   findPincodeInUrl() {
-    if (isPlatformBrowser(this.platformId)) {
-      this.browserUrl = this.windowRef.nativeWindow.location.href;
-    }
     const pincode = this.browserUrl.match(/\d+/g) || [];
     if (pincode[0] && pincode[0].length === 6) {
       this.commonService.getPincodeLocation(JSON.parse(pincode[0])).subscribe({

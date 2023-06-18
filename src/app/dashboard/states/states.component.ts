@@ -23,6 +23,7 @@ export class StatesComponent {
   singlePincode: string = '';
   clearDistrictName: string = '';
   clearPostOffice: string = '';
+  showProgressBar = false;
 
   constructor(
     private commonService: CommonServiceService, 
@@ -54,12 +55,14 @@ export class StatesComponent {
   }
 
   onStateSelect(state: string) {
+    this.showProgressBar = true;
     this.selectedState = state;
     this.commonService.getsDistrictList(this.selectedState).subscribe({
       next: response => {
         if(response) {
           this.districtList = response;
           this.showDistrictList = true;
+          this.showProgressBar = false;
         }
       },
       error: err => {
@@ -73,6 +76,7 @@ export class StatesComponent {
   }
 
   onDistrictSelect(district: string) {
+    this.showProgressBar = true;
     this.selectedDistrict =  district || '';
     this.commonService.getsPostOfficeList(this.selectedDistrict).subscribe({
       next: response => {
@@ -80,6 +84,7 @@ export class StatesComponent {
           this.poList = response;
           this.showDistrictList = false;
           this.showPoList = true;
+          this.showProgressBar = false;
         }
       },
       error: err => {
@@ -94,6 +99,7 @@ export class StatesComponent {
   }
 
   onPostOfficeSelect(postOffice: string) {
+    this.showProgressBar = true;
     const selectedPostOffice: string = postOffice || '';
     this.commonService.getPincodeByPo(selectedPostOffice).subscribe({
       next: response => {
@@ -103,6 +109,7 @@ export class StatesComponent {
           this.filterPincodeResult();
           this.filterDistrictResult();
           this.filterPostofficeName();
+          this.showProgressBar = false;
           setTimeout(() => {
             this.viewResult();
             window.scrollTo(0, 0);
