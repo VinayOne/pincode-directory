@@ -49,7 +49,7 @@ export class SearchComponent {
   ) { 
     this.router.events.pipe(filter((event:any) => event instanceof NavigationEnd)).subscribe((event: NavigationEnd) => {
       this.browserUrl = event.url;
-      this.findPincodeInUrl();
+      if (this.browserUrl.length > 1) this.findPincodeInUrl();
     });
   }
 
@@ -162,7 +162,7 @@ export class SearchComponent {
 
   onSubmit() {
     const pincodeData = {
-      selectedState: this.pincodeResult.result[0].State.toLowerCase().split(' ').join('-'),
+      selectedState: this.pincodeResult?.result[0]?.State.toLowerCase().split(' ').join('-'),
       selectedDistrict: this.clearDistrictName?.toLowerCase().split(' ').join('-'),
       selectedPostOffice: this.clearPostOffice?.toLowerCase().split(' ').join('-'),
       pincode: this.singlePincode
@@ -186,12 +186,12 @@ export class SearchComponent {
   }
 
   filterDistrictResult() {
-    const selectedDistrict = this.pincodeResult.result[0].District?.replace(/[^a-zA-Z0-9 ]/g, '') || '';
+    const selectedDistrict = this.pincodeResult?.result[0]?.District?.replace(/[^a-zA-Z0-9 ]/g, '') || '';
     if (selectedDistrict) this.clearDistrictName = selectedDistrict;
   }
 
   filterPostofficeName() {
-    const selectedPostOffice = this.pincodeResult.result[0].PostOffice?.replace(/[^a-zA-Z0-9 ]/g, '') || '';
+    const selectedPostOffice = this.pincodeResult?.result[0]?.PostOffice?.replace(/[^a-zA-Z0-9 ]/g, '') || '';
     if (selectedPostOffice) this.clearPostOffice = selectedPostOffice;
   }
 
@@ -228,7 +228,7 @@ export class SearchComponent {
   }
 
   findPincodeInUrl() {
-    const pincode = this.browserUrl.match(/\d+/g) || [];
+    const pincode = this.browserUrl?.match(/\d+/g) || [];
     if (pincode[0] && pincode[0].length === 6) {
       this.commonService.getPincodeLocation(JSON.parse(pincode[0])).subscribe({
         next: response => {

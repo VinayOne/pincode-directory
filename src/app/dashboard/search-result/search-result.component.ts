@@ -48,7 +48,7 @@ export class SearchResultComponent {
         if (response) {
           pincodeData = response;
           this.pincodeDetails = pincodeData.result;
-          console.log(this.pincodeDetails);
+          //console.log(this.pincodeDetails);
         }
       },
       error: err => {

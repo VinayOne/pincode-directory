@@ -132,19 +132,19 @@ export class StatesComponent {
    }
 
    filterDistrictResult() {
-    const selectedDistrict = this.pincodeResult.result[0].District?.replace(/[^a-zA-Z0-9 ]/g, '') || '';
+    const selectedDistrict = this.pincodeResult?.result[0]?.District?.replace(/[^a-zA-Z0-9 ]/g, '') || '';
     if(selectedDistrict) this.clearDistrictName = selectedDistrict;    
   }
 
   filterPostofficeName() {
-    const selectedPostOffice = this.pincodeResult.result[0].PostOffice?.replace(/[^a-zA-Z0-9 ]/g, '') || '';
+    const selectedPostOffice = this.pincodeResult?.result[0]?.PostOffice?.replace(/[^a-zA-Z0-9 ]/g, '') || '';
     if(selectedPostOffice) this.clearPostOffice = selectedPostOffice;
     
   }
 
   viewResult(){
     const pincodeData = {
-      selectedState: this.pincodeResult.result[0].State.toLowerCase().split(' ').join('-'),
+      selectedState: this.pincodeResult?.result[0]?.State.toLowerCase().split(' ').join('-'),
       selectedDistrict: this.clearDistrictName?.toLowerCase().split(' ').join('-'),
       selectedPostOffice: this.clearPostOffice?.toLowerCase().split(' ').join('-'),
       pincode: this.singlePincode

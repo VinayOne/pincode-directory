@@ -3,6 +3,6 @@ export const environment = {
   application:
   {
     name: 'pincode-directory',
-    apiUrl: 'https://www.pincode.directory/api'
+    apiUrl: 'https://pincode.directory/api'
   }
 };
