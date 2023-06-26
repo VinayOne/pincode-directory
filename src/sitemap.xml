@@ -13,6 +13,11 @@
   <priority>1.00</priority>
 </url>
 <url>
+  <loc>https://pincode.directory/pincode</loc>
+  <lastmod>2023-06-13T23:53:51+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
   <loc>https://pincode.directory/about-us</loc>
   <lastmod>2023-06-13T23:53:51+00:00</lastmod>
   <priority>0.80</priority>
