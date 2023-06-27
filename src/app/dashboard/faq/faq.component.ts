@@ -10,7 +10,7 @@ export class FaqComponent {
   items = [
     {
     question: 'How can I find the Pin Code for a specific address in India?', 
-    answer: 'You can use <a routerLink="/">https://pincode.directory</a> to find pin codes. Also you can explore other online tools, postal websites, or the official Indian Postal Department website to search for pin codes based on addresses.'
+    answer: 'You can use https://pincode.directory to find pin codes. Also you can explore other online tools, postal websites, or the official Indian Postal Department website to search for pin codes based on addresses.'
   },
   {
     question: 'How many types of Post Office exist & what are HO, BO & SO?', 
