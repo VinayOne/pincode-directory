@@ -6,6 +6,7 @@ import { NgFor, AsyncPipe } from '@angular/common';
 import { CommonServiceService } from 'src/app/services/common-service.service';
 import { NavigationEnd, Router } from '@angular/router';
 import { LocalstorageService } from 'src/app/services/localstorage.service';
+import { SeoService } from 'src/app/services/seo.service';
 
 @Component({
   selector: 'app-search',
@@ -34,6 +35,7 @@ export class SearchComponent {
   enableSearchBtn = false;
   invalidPincode = false;
   browserUrl: string = '';
+  hostName = 'https://pincode.directory';
 
   pincodeForm = new FormGroup({
     stateName: new FormControl('', Validators.required),
@@ -45,7 +47,8 @@ export class SearchComponent {
   constructor(
     private commonService: CommonServiceService,
     private router: Router,
-    private localStorage: LocalstorageService,   
+    private localStorage: LocalstorageService,
+    private seoService: SeoService  
   ) { 
     this.router.events.pipe(filter((event:any) => event instanceof NavigationEnd)).subscribe((event: NavigationEnd) => {
       this.browserUrl = event.url;
@@ -55,6 +58,7 @@ export class SearchComponent {
 
   ngOnInit(): void {
     this.getStateList();
+    this.seoService.updateCanonicalUrl(`${this.hostName}${this.browserUrl}`);
   }
 
   private _filterState(value: string): string[] {

@@ -9,6 +9,7 @@ import { Title, Meta } from '@angular/platform-browser';
 export class HomeComponent {
 
  pageTitle = 'Pin Code Directory | Find Current Location Pin Code';
+ hostName='https://pincode.directory';
 
  constructor(
   private titleService: Title, 
@@ -17,7 +18,7 @@ export class HomeComponent {
 
  ngOnInit(): void{
   this.metaService.addTags([
-    {name: 'description', content: 'Get your area Pin Code with this easy-to-use Pin Code Directory! Search for current location pin code or pincode of my location with this quick & easy online tool.'},
+    {name: 'description', content: 'Get your area Pin Code with this easy-to-use Pin Code Directory! Search for current location pin code or pincode of my location with this quick & easy tool.'},
     {name: 'author' , content: 'Vinay Kumar Munda'},
     {name: 'robots', content: 'index, follow'},
     {name: 'viewport', content: 'width=device-width, initial-scale=1'},
