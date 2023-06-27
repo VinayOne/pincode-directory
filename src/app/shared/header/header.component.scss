@@ -8,6 +8,10 @@ header {
     background-color: mat.get-color-from-palette($primary, A400);
     color: #ffffff;
 
+    h1 {
+        display: none;
+    }
+
     a {
         color: #ffffff;
 

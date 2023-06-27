@@ -17,11 +17,11 @@ export class HomeComponent {
 
  ngOnInit(): void{
   this.metaService.addTags([
-    {name: 'description', content: 'Get your street or area Pin Code with this easy to use Pin Code Directory! Find your current location Pin Code with this quick and easy online tool.'},
+    {name: 'description', content: 'Get your area Pin Code with this easy-to-use Pin Code Directory! Search for current location pin code or pincode of my location with this quick & easy online tool.'},
     {name: 'author' , content: 'Vinay Kumar Munda'},
     {name: 'robots', content: 'index, follow'},
     {name: 'viewport', content: 'width=device-width, initial-scale=1'},
-    {name: 'keywords', content: 'pincode, pincode of my location, current location pin code, my current location pin code, my area pin code'},
+    {name: 'keywords', content: 'pin code, pincode of my location, current location pin code, my current location pin code, my area pin code'},
     {name: 'date', content: '2023-06-15', scheme: 'YYYY-MM-DD'},
     {charset: 'utf-8'}
   ]);

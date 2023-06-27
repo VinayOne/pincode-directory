@@ -25,18 +25,20 @@ export class AppComponent {
     private gtmService: GoogleTagManagerService,
     private router: Router
     ) {
-      AppComponent.isBrowser.next(isPlatformBrowser(platformId));      
+      AppComponent.isBrowser.next(isPlatformBrowser(platformId));    
       }
 
   ngOnInit(): void{    
-    this.fetchVisitorDetails();
-    setTimeout(() => {
-      if(!this.excludeIpList.includes(this.visitorData.ip)) {
-        this.captureVisitorDetails();
-      } else {
-        console.info('Developer Visit');
-      }     
-    }, 1000)
+    // this.fetchVisitorDetails();
+    // setTimeout(() => {
+    //   if(!this.excludeIpList.includes(this.visitorData.ip)) {
+    //     this.captureVisitorDetails();
+    //   } else {
+    //     console.info('Developer Visit');
+    //   }     
+    // }, 1000);
+
+    //this.sendGtmEvents();
   }
 
   fetchVisitorDetails() {
