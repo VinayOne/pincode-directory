@@ -14,6 +14,7 @@ import { MaterialModuleModule } from '../material-module/material-module.module'
 import { CommonServiceService } from 'src/app/services/common-service.service';
 import { LocalstorageService } from 'src/app/services/localstorage.service';
 import { Meta, Title } from '@angular/platform-browser';
+import { ChandrayaanComponent } from 'src/app/dashboard/chandrayaan/chandrayaan.component';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { Meta, Title } from '@angular/platform-browser';
     VideoComponent,
     StatesComponent,
     SearchComponent,
-    ContactComponent
+    ContactComponent,
+    ChandrayaanComponent
   ],
   imports: [
     CommonModule,
@@ -46,7 +48,8 @@ import { Meta, Title } from '@angular/platform-browser';
     VideoComponent,
     StatesComponent,
     SearchComponent,
-    ContactComponent
+    ContactComponent,
+    ChandrayaanComponent
   ],
   providers: [
     CommonServiceService,
