@@ -20,3 +20,28 @@ $primary: mat.define-palette(mat.$deep-purple-palette);
   .mat-mdc-form-field {
     min-width: 100%;
 }
+
+.contentWrap {
+  margin-bottom: 7px;
+  border-bottom: 1px solid rgb(159, 159, 159);
+}
+
+.contentWrap:nth-child(even) {
+  background-color: #e8e8e8;
+}
+
+.cellFormat {
+  margin: auto 0 auto 0;
+
+  .col-4 {
+    border: 1px solid rgb(159, 159, 159);
+    border-right: none;
+    border-bottom: none;
+    padding: 7px;
+  }
+
+  .col-4:last-child {
+    border-right: 1px solid rgb(159, 159, 159);
+  }
+  
+}

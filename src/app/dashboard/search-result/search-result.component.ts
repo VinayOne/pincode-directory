@@ -14,6 +14,7 @@ export class SearchResultComponent {
   pincodePassedData: any;
   pincode: number = 110001;
   pincodeDetails: any;
+  filterTxt: string = '';
 
   constructor(private route: ActivatedRoute, 
     private commonService: CommonServiceService, 
@@ -48,19 +49,12 @@ export class SearchResultComponent {
         if (response) {
           pincodeData = response;
           this.pincodeDetails = pincodeData.result;
-          //console.log(this.pincodeDetails);
         }
       },
       error: err => {
         console.log('Error: ', err);
       }
     })
-  }
-
-  searchFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value.trim().toLowerCase();
-    //this.pincodeDetails = this.pincodeDetails.filter((data: any) => data.includes(filterValue));
-    console.log('filter: ', filterValue)
   }
 
 }

@@ -15,14 +15,14 @@
                                         <h2>Found {{pincodeDetails?.length || 0}} results for <span class="pin">{{pincode}}</span></h2>
                                     </div>
                                     <div class="col-lg-5 com-md-5 col-sm-12 col-xs-12">
-                                        <!-- <mat-form-field appearance="outline">
-                                            <mat-label>Search</mat-label>
-                                            <input type="text" matInput (keyup)="searchFilter($event)" />
-                                        </mat-form-field> -->
+                                        <mat-form-field appearance="outline" *ngIf="pincodeDetails.length >4">
+                                            <mat-label>Sub District/Locality/Post Office</mat-label>
+                                            <input type="text" matInput [(ngModel)]="filterTxt" />
+                                        </mat-form-field>
                                     </div>
                                 </div>                            
-                            <div *ngFor="let pin of pincodeDetails">
-                                <div class="row">
+                            <div class="contentWrap" *ngFor="let pin of pincodeDetails | filterResult: filterTxt">
+                                <div class="row cellFormat">
                                     <div class="col-4">
                                         Pincode : <strong>{{pin.Pincode}}</strong>
                                     </div>
@@ -33,7 +33,7 @@
                                         Post Office : {{pin.PostOffice}}
                                     </div>
                                 </div>
-                                <div class="row">
+                                <div class="row cellFormat">
                                     <div class="col-4">
                                         Sub District : {{pin.SubDistrict}}
                                     </div>
@@ -44,7 +44,6 @@
                                         State : {{pin.State}}
                                     </div>
                                 </div>
-                                <mat-divider class="mt-3 mb-3" *ngIf="pincodeDetails?.length > 1"></mat-divider>
                             </div>
                         </mat-card-content>
                     </mat-card>

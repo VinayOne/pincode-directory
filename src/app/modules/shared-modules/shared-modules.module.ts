@@ -15,6 +15,7 @@ import { CommonServiceService } from 'src/app/services/common-service.service';
 import { LocalstorageService } from 'src/app/services/localstorage.service';
 import { Meta, Title } from '@angular/platform-browser';
 import { ChandrayaanComponent } from 'src/app/dashboard/chandrayaan/chandrayaan.component';
+import { FilterResultPipe } from 'src/app/pipes/filter-result.pipe';
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import { ChandrayaanComponent } from 'src/app/dashboard/chandrayaan/chandrayaan.
     StatesComponent,
     SearchComponent,
     ContactComponent,
-    ChandrayaanComponent
+    ChandrayaanComponent,
+    FilterResultPipe
   ],
   imports: [
     CommonModule,
@@ -49,7 +51,8 @@ import { ChandrayaanComponent } from 'src/app/dashboard/chandrayaan/chandrayaan.
     StatesComponent,
     SearchComponent,
     ContactComponent,
-    ChandrayaanComponent
+    ChandrayaanComponent,
+    FilterResultPipe
   ],
   providers: [
     CommonServiceService,
