@@ -19,3 +19,16 @@ mat-icon {
     height: 24px !important;
     margin-right: 10px;
 }
+
+.indianFlag {
+    width: 329px;
+    height: 100%;
+    display: block;
+    background-image: url('../../../assets/images/india-flag.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 100%;
+    margin-top: -106px;
+    margin-bottom: -60px;
+    opacity: 0.6;
+}
