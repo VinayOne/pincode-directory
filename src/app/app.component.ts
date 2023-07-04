@@ -16,7 +16,6 @@ export class AppComponent {
   title = 'pincode-directory';
   visitorData: any;
   currentTime = new Date();
-  excludeIpList = ['125.99.240.100', '144.24.59.157'];
 
   constructor(
     @Inject(PLATFORM_ID) private platformId: any,
@@ -28,45 +27,7 @@ export class AppComponent {
       AppComponent.isBrowser.next(isPlatformBrowser(platformId));    
       }
 
-  ngOnInit(): void{    
-    // this.fetchVisitorDetails();
-    // setTimeout(() => {
-    //   if(!this.excludeIpList.includes(this.visitorData.ip)) {
-    //     this.captureVisitorDetails();
-    //   } else {
-    //     console.info('Developer Visit');
-    //   }     
-    // }, 1000);
-
-    //this.sendGtmEvents();
-  }
-
-  fetchVisitorDetails() {
-    this.commonService.getVisitorIpDetail().subscribe({
-      next: response => {
-        if(response) this.visitorData = response;
-      },
-      error: err => {
-        console.error('Error: ', err);
-      }
-    })
-  }
-
-  captureVisitorDetails() {
-    const payLoad = {
-      ip : this.visitorData.ip,
-      country: this.visitorData.country_name,
-      visitedtime: this.currentTime
-    }
-
-    this.commonService.captureVisitorData(payLoad).subscribe({
-      next: response => {
-        if(response) console.info('STATUS 200 - OK');
-      },
-      error: err => {
-        console.error('Error: ', err);
-      }
-    })
+  ngOnInit(): void{
   }
 
   sendGtmEvents() {
