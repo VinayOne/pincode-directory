@@ -35,11 +35,11 @@ export class SearchResultComponent {
     } else {
       if (this.pincodePassedData) this.getPincodeDetails();
     }
-    this.titleService.setTitle(`Pin Code: ${this.pincodeDetails[0]?.Pincode}- ${this.pincodeDetails[0]?.VillageLocality} - ${this.pincodeDetails[0]?.PostOffice} - ${this.pincodeDetails[0]?.State} - pincode.directory`);
+    this.titleService.setTitle(`${this.pincodeDetails[0]?.District} Pin Code ${this.pincodeDetails[0]?.Pincode} - ${this.pincodeDetails[0]?.VillageLocality} - ${this.pincodeDetails[0]?.PostOffice} - ${this.pincodeDetails[0]?.State} - pincode.directory`);
     this.meta.updateTag(
-      { name: 'description', content: `Pin Code: ${this.pincodeDetails[0]?.Pincode} is belong to ${this.pincodeDetails[0]?.VillageLocality}, ${this.pincodeDetails[0]?.PostOffice}, ${this.pincodeDetails[0]?.State}` },
+      { name: 'description', content: `${this.pincodeDetails[0]?.District} Pin Code ${this.pincodeDetails[0]?.Pincode}, ${this.pincodeDetails[0]?.VillageLocality} Pin Code, ${this.pincodeDetails[0]?.PostOffice} Pin Code, ${this.pincodeDetails[0]?.State}` }
     );
-    this.meta.updateTag({ name: 'keywords', content: `pin code ${this.pincodeDetails[0]?.Pincode}, pin code ${this.pincodeDetails[0]?.VillageLocality}, pin code ${this.pincodeDetails[0]?.PostOffice}` });
+    this.meta.updateTag({ name: 'keywords', content: `${this.pincodeDetails[0]?.District} pin code ${this.pincodeDetails[0]?.Pincode}, ${this.pincodeDetails[0]?.VillageLocality} pin code, ${this.pincodeDetails[0]?.PostOffice} pin code` });
   }
 
   getPincodeDetails() {
@@ -48,7 +48,7 @@ export class SearchResultComponent {
       next: response => {
         if (response) {
           pincodeData = response;
-          this.pincodeDetails = pincodeData.result;
+          this.pincodeDetails = pincodeData?.result;
         }
       },
       error: err => {
