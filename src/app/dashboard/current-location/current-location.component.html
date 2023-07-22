@@ -1,0 +1,16 @@
+<div class="row mb-3" *ngIf="visitorIpDetails">
+    <div class="col-12">
+        <mat-card>
+            <mat-card-content>
+                <div class="row">
+                    <div class="col-12">
+                        <p>Your current location is <strong>{{visitorIpDetails?.city}}</strong>,
+                            <strong>{{visitorIpDetails?.region}}</strong></p>
+                        <p>Your Pin Code / Postal Code is <strong>{{visitorIpDetails?.postal || 'Error fetching your pin
+                                code'}}</strong></p>
+                    </div>
+                </div>
+            </mat-card-content>
+        </mat-card>
+    </div>
+</div>

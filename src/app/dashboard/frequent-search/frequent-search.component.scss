@@ -1,0 +1,16 @@
+a {
+    text-decoration: none;
+    color: #666666 !important;
+}
+
+a:hover {
+    color: red !important;
+    text-shadow: 1px 1px 7px yellow;
+    cursor: pointer;
+    font-weight: 700;
+}
+
+.border {
+    border: 1px solid grey;
+    margin: 11px;
+}

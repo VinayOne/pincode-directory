@@ -44,4 +44,12 @@ export class CommonServiceService {
   captureVisitorData(visitorData: any) {
     return this.http.post(`${environment.application.apiUrl}/trafficCapture`, visitorData);
   }
+
+  getVisitorIp() {
+    return this.http.get(`https://api.ipify.org/?format=json`);
+  }
+
+  getIpDetails(ip: any) {
+    return this.http.get(`https://ipinfo.io/${ip}?token=5d166d866260b9`);
+  }
 }

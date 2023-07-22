@@ -16,6 +16,9 @@ import { LocalstorageService } from 'src/app/services/localstorage.service';
 import { Meta, Title } from '@angular/platform-browser';
 import { ChandrayaanComponent } from 'src/app/dashboard/chandrayaan/chandrayaan.component';
 import { FilterResultPipe } from 'src/app/pipes/filter-result.pipe';
+import { FrequentSearchComponent } from 'src/app/dashboard/frequent-search/frequent-search.component';
+import { CurrentLocationComponent } from 'src/app/dashboard/current-location/current-location.component';
+import { PincodeStateCombinationComponent } from 'src/app/dashboard/pincode-state-combination/pincode-state-combination.component';
 
 
 @NgModule({
@@ -28,7 +31,10 @@ import { FilterResultPipe } from 'src/app/pipes/filter-result.pipe';
     SearchComponent,
     ContactComponent,
     ChandrayaanComponent,
-    FilterResultPipe
+    FilterResultPipe,
+    FrequentSearchComponent,
+    CurrentLocationComponent,
+    PincodeStateCombinationComponent
   ],
   imports: [
     CommonModule,
@@ -52,7 +58,10 @@ import { FilterResultPipe } from 'src/app/pipes/filter-result.pipe';
     SearchComponent,
     ContactComponent,
     ChandrayaanComponent,
-    FilterResultPipe
+    FilterResultPipe,
+    FrequentSearchComponent,
+    CurrentLocationComponent,
+    PincodeStateCombinationComponent
   ],
   providers: [
     CommonServiceService,

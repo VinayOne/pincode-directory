@@ -8,7 +8,6 @@ import { NotfoundComponent } from './notfound/notfound.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SharedModulesModule } from './modules/shared-modules/shared-modules.module';
 import { SearchResultComponent } from './dashboard/search-result/search-result.component';
-import { ArticleComponent } from './dashboard/article/article.component';
 import { GoogleTagManagerService } from "angular-google-tag-manager";
 
 @NgModule({
@@ -16,8 +15,7 @@ import { GoogleTagManagerService } from "angular-google-tag-manager";
     AppComponent,
     HomeComponent,
     NotfoundComponent,
-    SearchResultComponent,
-    ArticleComponent
+    SearchResultComponent
   ],
   imports: [
     BrowserModule,

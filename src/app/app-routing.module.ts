@@ -18,6 +18,10 @@ const routes: Routes = [
     path: 'disclaimer',
     loadChildren: () => import('./disclaimer/disclaimer.module').then(mod => mod.DisclaimerModule)
   },
+  {
+    path: 'what-is-pin-code',
+    loadChildren: () => import('./article/article.module').then(mod => mod.ArticleModule)
+  },
   { path: 'pincode/:pincode/:state/:district/:postoffice', component: SearchResultComponent },
   { path: '**', component: HomeComponent },
 ];
