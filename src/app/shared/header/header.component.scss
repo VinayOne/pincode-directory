@@ -13,7 +13,8 @@ $primary: mat.define-palette(mat.$deep-purple-palette);
 }
 
 .link {
-    color:#ffffff;
+    color: #ffffff;
+
     @media screen and (max-width: 740px) {
         display: none;
     }
