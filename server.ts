@@ -3,9 +3,12 @@ import 'zone.js/node';
 import { APP_BASE_HREF } from '@angular/common';
 import { ngExpressEngine } from '@nguniversal/express-engine';
 import * as express from 'express';
+// import mongoose from 'mongoose';
 import { existsSync } from 'node:fs';
 import { join } from 'node:path';
 import { AppServerModule } from './src/main.server';
+// import { config } from './config/config';
+// import apiRoutes from './routes/routes';
 
 // The Express app is exported so that it can be used by serverless Functions.
 export function app(): express.Express {
@@ -21,8 +24,35 @@ export function app(): express.Express {
 
   server.set('view engine', 'html');
   server.set('views', distFolder);
+  // server.use(express.urlencoded({extended: true}));
+  // server.use(express.json());
+
+  // /* Rules of API */
+
+  // server.use((req, res, next) => {
+  //   res.header('Access-Control-Allow-Origin', '*');
+  //   res.header('Access-Control_Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
+
+  //   // if(req.method == 'OPTIONS') {
+  //   //   res.header('Access-Control-Allow-Methods', 'PUT, POST, PATCH, DELETE, GET');
+  //   //   return res.status(200).json({});
+  //   // }
+
+  //   next();
+  // });
+
+  // /* Mongoose Connections */
+
+  // mongoose.connect(config.mongo.url, { retryWrites: true, w: 'majority' })
+  // .then(() => {
+  //   console.log('DB Connected')
+  // })
+  // .catch((error) => {
+  //   console.log(error);
+  // })
 
   // Example Express Rest API endpoints
+ // server.use('/api', apiRoutes);
   // server.get('/api/**', (req, res) => { });
   // Serve static files from /browser
   server.get('*.*', express.static(distFolder, {
@@ -38,7 +68,7 @@ export function app(): express.Express {
 }
 
 function run(): void {
-  const port = process.env['PORT'] || 3100;
+  const port = process.env['SERVER_PORT'] || 3100;
 
   // Start up the Node server
   const server = app();

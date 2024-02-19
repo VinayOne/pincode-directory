@@ -27,7 +27,7 @@ mongoose.connect(url, connectionParams)
 		//   res.sendFile(path.join(__dirname, "dist", "pincode-directory", "index.html"));
 		// });
 
-		const port = process.env.PORT || 3200;
+		const port = process.env.SERVER_PORT || 3200;
 
 		app.listen(port, () => console.log(`Listening on port ${port}`));
     })
