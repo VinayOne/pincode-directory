@@ -28,6 +28,7 @@ export class AppComponent {
       }
 
   ngOnInit(): void{
+    this.sendGtmEvents()
   }
 
   sendGtmEvents() {
