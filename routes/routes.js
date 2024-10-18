@@ -72,11 +72,10 @@ request.then((result) => {
 router.route('/trafficCapture').post(async (req, res) => {
   const visitor = new TrafficCaprure({
     ip : req.body.ip,
-    country : req.body.country, 
-    datetime : req.body.visitedtime
+    pnr: req.body.pnr
   });
   await visitor.save();
-  res.status(200).json({'message': 'Traffic Saved Successfully'});
+  res.status(200).json({'message': 'Traffic Captured Successfully'});
 })
 
 module.exports = router;
